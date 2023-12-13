@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { BookModule } from './book/book.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PractModule } from './pract/pract.module';
 
 @Module({
   imports: [BookModule,
@@ -11,8 +12,10 @@ import { MongooseModule } from '@nestjs/mongoose';
       envFilePath: '.env',
       isGlobal: true,
     }),
+    // function is used to configure and connect to a MongoDB database using Mongoose, :MongooseModule.forRoot(process.env.DB_URI)
     MongooseModule.forRoot(process.env.DB_URI),
-    BookModule,],
+    BookModule,
+    PractModule,],
   controllers: [AppController],
   providers: [AppService],
 })
