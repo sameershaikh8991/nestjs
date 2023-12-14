@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Book } from './book.schema';
 import * as  mongoose from 'mongoose';
+import { CreateBookDto } from './dto/create-book-dto';
 
 @Injectable()
 export class BookService {
@@ -16,7 +17,7 @@ export class BookService {
         return books;
     }
 
-    async saveBook(book:Book){
+    async saveBook(book:CreateBookDto){
         const res = this.bookModel.create(book);
         return res;
     }
@@ -31,7 +32,7 @@ export class BookService {
 
 
 
-    async updateBook(bookId:string,book:Book){
+    async updateBook(bookId:string,book:CreateBookDto){
         const res = await this.bookModel.findByIdAndUpdate(bookId,book);
     
         return res;
