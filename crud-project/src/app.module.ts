@@ -14,7 +14,6 @@ import { PractModule } from './pract/pract.module';
     }),
     // function is used to configure and connect to a MongoDB database using Mongoose, :MongooseModule.forRoot(process.env.DB_URI)
     MongooseModule.forRoot(process.env.DB_URI),
-    BookModule,
     PractModule,],
   controllers: [AppController],
   providers: [AppService],
