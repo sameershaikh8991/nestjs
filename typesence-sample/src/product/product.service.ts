@@ -5,16 +5,16 @@ import * as mongoose from 'mongoose';
 import { SearchClient } from 'typesense';
 import { Product, ProductDocument } from './Product.schema';
 
-
 @Injectable()
 export class ProductService {
- 
+  private typesenseClient: SearchClient;
 
   constructor(
-    @InjectModel(Product.name) 
-    private productModel: mongoose.Model<ProductDocument>, private typesenseClient: SearchClient
+    @InjectModel(Product.name) private productModel: mongoose.Model<ProductDocument>,
+    private readonly injectedSearchClient: SearchClient,
   ) {
-    this.typesenseClient = new SearchClient({
+    // Initialize the SearchClient if not injected
+    this.typesenseClient = injectedSearchClient || new SearchClient({
       nodes: [
         {
           host: 'localhost',
@@ -37,7 +37,7 @@ export class ProductService {
   async searchTypesense(query: string): Promise<any[]> {
     const searchParameters: any = {
       q: query,
-      queryBy: 'name,description', 
+      queryBy: 'name,description',
       typoTolerance: true,
     };
 

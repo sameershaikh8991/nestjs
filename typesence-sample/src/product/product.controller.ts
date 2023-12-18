@@ -5,8 +5,8 @@ import { ProductService } from './product.service';
 export class ProductController {
     constructor(private readonly productService: ProductService) {}
 
-    @Get()
-    async search(@Query('query') query: string): Promise<{ mongoResults: any, typesenseResults: any }> {
-      return this.productService.fullTextSearch(query);
-    }
+    // @Get()
+    // async search(@Query('query') query: string): Promise<{ mongoResults: any, typesenseResults: any }> {
+    //   return this.productService.fullTextSearch(query);
+    // }
 }
